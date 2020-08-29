@@ -14,7 +14,7 @@ public class Tier1ConfigClientTest
 	{
 		try
 		{
-			URL discoveryURL = new URL("http://52.23.185.3:80/app-central/tier1config?ServiceName=ConfigService");
+			URL discoveryURL = new URL("http://52.23.185.3:80/svc-central/tier1config?ServiceName=ConfigService");
 			HttpURLConnection discoveryConn = (HttpURLConnection) discoveryURL.openConnection();
 
 			discoveryConn.setRequestMethod("GET");

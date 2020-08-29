@@ -13,7 +13,7 @@ public class DecryptClientTest
 	{
 		try
 		{
-			URL discoveryURL = new URL("http://52.23.185.3:80/app-central/decrypt?cipherAuthorizationId=1c044b37-9388-4e6b-baf2-9fe09dea4281&toBeDecrypted=" + URLEncoder.encode("TdmVTwllpL3hE+HyDz1ScA==", "UTF-8"));
+			URL discoveryURL = new URL("http://52.23.185.3:80/svc-central/decrypt?cipherAuthorizationId=1c044b37-9388-4e6b-baf2-9fe09dea4281&toBeDecrypted=" + URLEncoder.encode("TdmVTwllpL3hE+HyDz1ScA==", "UTF-8"));
 			HttpURLConnection discoveryConn = (HttpURLConnection) discoveryURL.openConnection();
 
 			discoveryConn.setRequestMethod("GET");

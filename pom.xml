@@ -73,7 +73,7 @@
 	</properties>
 
 	<build>
-		<finalName>app-central</finalName>
+		<finalName>svc-central</finalName>
 		<extensions>
 			<extension>
 				<groupId>org.springframework.build</groupId>
