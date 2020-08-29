@@ -2,11 +2,12 @@ com\TBD\central\services\Call911.class
 com\TBD\central\services\Tier1ConfigurationServlet.class
 com\TBD\central\services\dao\CentralDAOImpl.class
 com\TBD\central\services\dao\DataStore.class
+com\TBD\central\services\dao\CentralDAO.class
+com\TBD\central\services\dao\DBProperties.class
+com\TBD\central\services\AuthorizationIdValidator.class
 com\TBD\central\services\AbstractCentralServlet.class
 com\TBD\central\services\dao\DAOException.class
 com\TBD\central\services\CentralDecrypter.class
-com\TBD\central\services\dao\CentralDAO.class
 com\TBD\central\services\dao\Decrypter.class
 com\TBD\central\services\DiscoveryServlet.class
-com\TBD\central\services\dao\DBProperties.class
 com\TBD\central\services\DecryptServlet.class

@@ -1,17 +1,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.TBD.central</groupId>
 	<artifactId>app-central</artifactId>
 	<packaging>war</packaging>
 	<name>app-central Maven Webapp</name>
 	<url>http://maven.apache.org</url>
-
-	<parent>
-		<groupId>com.TBD.central</groupId>
-		<artifactId>mvn-parent</artifactId>
-		<version>1.0</version>
-		<relativePath>../mvn-parent/pom.xml</relativePath>
-	</parent>
+	<version>${app-central-version}</version>
 
 	<dependencies>
 		<dependency>
@@ -42,9 +37,62 @@
 		</dependency>
 	</dependencies>
 
+	<properties>
+		<org.springframework.build.aws-maven-version>5.0.0.RELEASE</org.springframework.build.aws-maven-version>
+		<maven-compiler-plugin-version>3.3</maven-compiler-plugin-version>
+		<maven-dependency-plugin>2.10</maven-dependency-plugin>
+		
+		<app-central-version>0.1</app-central-version>
+
+		<java-source-version>1.8</java-source-version>
+		<java-target-version>1.8</java-target-version>
+
+		<javaweb-source-version>1.7</javaweb-source-version>
+		<javaweb-target-version>1.7</javaweb-target-version>
+
+		<javax.jms-api-version>2.0</javax.jms-api-version>
+		<servlet-api-version>2.5</servlet-api-version>
+		
+		<junit-version>3.8.1</junit-version>
+		<slf4j-api-version>1.7.12</slf4j-api-version>
+		
+		<commons-io-version>2.6</commons-io-version>
+		<commons-dbcp2-version>2.1.1</commons-dbcp2-version>
+		<commons-codec-version>1.9</commons-codec-version>
+		
+		<amqp-client-version>3.5.6</amqp-client-version>
+		<mysql-connector-java-version>5.1.36</mysql-connector-java-version>
+
+		<gson-version>2.4</gson-version>
+		<jersey-client-version>1.9.1</jersey-client-version>
+		<jersey-json-version>1.9.1</jersey-json-version>
+		<jstl-version>1.2</jstl-version>
+		
+		<javax.websocket-api-version>1.0</javax.websocket-api-version>
+		<jetty-version>9.2.7.v20150116</jetty-version>
+	</properties>
+
 	<build>
 		<finalName>app-central</finalName>
+		<extensions>
+			<extension>
+				<groupId>org.springframework.build</groupId>
+				<artifactId>aws-maven</artifactId>
+				<version>${org.springframework.build.aws-maven-version}</version>
+			</extension>
+		</extensions>
+		
 		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven-compiler-plugin-version}</version>
+				<configuration>
+					<source>${java-source-version}</source>
+					<target>${java-target-version}</target>
+				</configuration>
+			</plugin>
+		
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
@@ -72,7 +120,7 @@
 									<version>${app-central-version}</version>
 									<type>war</type>
 									<overWrite>true</overWrite>
-									<outputDirectory>../../../Export</outputDirectory>
+									<outputDirectory>../Export</outputDirectory>
 									<destFileName>app-central.war</destFileName>
 								</artifactItem>
 							</artifactItems>
