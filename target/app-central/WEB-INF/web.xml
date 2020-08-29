@@ -1,0 +1,37 @@
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+          http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+    version="3.0">
+	<display-name>app-central</display-name>
+
+	<servlet>
+		<servlet-name>DiscoveryServlet</servlet-name>
+		<servlet-class>com.TBD.central.services.DiscoveryServlet</servlet-class>
+	</servlet>
+
+	<servlet>
+		<servlet-name>Tier1ConfigurationServlet</servlet-name>
+		<servlet-class>com.TBD.central.services.Tier1ConfigurationServlet</servlet-class>
+	</servlet>
+
+	<servlet>
+		<servlet-name>DecryptServlet</servlet-name>
+		<servlet-class>com.TBD.central.services.DecryptServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>DiscoveryServlet</servlet-name>
+		<url-pattern>/discover</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>Tier1ConfigurationServlet</servlet-name>
+		<url-pattern>/tier1config</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>DecryptServlet</servlet-name>
+		<url-pattern>/decrypt</url-pattern>
+	</servlet-mapping>
+
+</web-app>
