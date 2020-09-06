@@ -6,9 +6,7 @@ import javax.crypto.spec.SecretKeySpec;
 
 import org.apache.commons.codec.binary.Base64;
 
-import com.TBD.central.services.dao.Decrypter;
-
-public class CentralDecrypter implements Decrypter
+public class CentralDecrypter
 {
 	private static final String UTF8 = "UTF-8";
 	private static final String AES_ENCRYPTION_ALGORITHM = "AES";
@@ -23,7 +21,6 @@ public class CentralDecrypter implements Decrypter
 		key2 = "ThisIsASecretKet";
 	}
 	
-	@Override
 	public String decrypt(String toBeDecrypted) throws Exception
 	{
 		SecretKeySpec skeySpec = new SecretKeySpec(key1.getBytes(UTF8), AES_ENCRYPTION_ALGORITHM);

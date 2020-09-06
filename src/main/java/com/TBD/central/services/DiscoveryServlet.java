@@ -17,7 +17,6 @@ import com.TBD.central.services.dao.DAOException;
 public class DiscoveryServlet extends AbstractCentralServlet
 {
 	private static final long serialVersionUID = 1L;
-	private static final String SERVICE_NAME = "ServiceName";
 	
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -46,7 +45,7 @@ public class DiscoveryServlet extends AbstractCentralServlet
 			else
 			{
 				response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-				response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Server [" + remoteHost + "] is not registered server.");
+				response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Server [" + remoteHost + "] is not a registered server.");
 			}
 		}
 		catch (DAOException expt)

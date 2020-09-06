@@ -18,7 +18,7 @@ import com.TBD.central.services.dao.DAOException;
 public abstract class AbstractCentralServlet extends HttpServlet
 {
 	private static final long serialVersionUID = 1L;
-	private static final String SERVICE_NAME = "ServiceName";
+	protected static final String SERVICE_NAME = "ServiceName";
 	
 	protected CentralDAO centralDAO = null;
 	/**

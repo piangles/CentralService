@@ -14,7 +14,7 @@ public class DiscoveryClientTest
 	{
 		try
 		{
-			URL discoveryURL = new URL("http://52.23.185.3:80/svc-central/discover?ServiceName=LoggingServiceEndpoint");
+			URL discoveryURL = new URL("http://52.23.185.3:80/app-central/discover?ServiceName=LoggingServiceEndpoint");
 			HttpURLConnection discoveryConn = (HttpURLConnection) discoveryURL.openConnection();
 
 			discoveryConn.setRequestMethod("GET");

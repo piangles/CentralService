@@ -7,6 +7,8 @@ import java.util.Properties;
 
 import org.apache.commons.dbcp2.BasicDataSource;
 
+import com.TBD.central.services.CentralDecrypter;
+
 public class DataStore
 {
 	public static final String DRIVER_CLASSNAME = "DriverClassName";
@@ -20,7 +22,7 @@ public class DataStore
 
 	private BasicDataSource ds = null;
 
-	public DataStore(Properties dataStoreProps, Decrypter decrypter) throws Exception
+	public DataStore(Properties dataStoreProps, CentralDecrypter decrypter) throws Exception
 	{
 		ds = new BasicDataSource();
 		ds.setDriverClassName(dataStoreProps.getProperty(DRIVER_CLASSNAME));

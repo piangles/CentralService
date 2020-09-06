@@ -47,7 +47,7 @@ public class Tier1ConfigurationServlet extends AbstractCentralServlet
 			else
 			{
 				response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-				response.getWriter().write("Server [" + remoteHost + "] is not registered server.");
+				response.getWriter().write("Server [" + remoteHost + "] is not a registered server.");
 			}
 		}
 		catch (DAOException expt)

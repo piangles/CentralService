@@ -17,10 +17,12 @@ public class DecryptServlet extends AbstractCentralServlet
 {
 	
 	private static final long serialVersionUID = 1L;
+	private static final String ENCRYPTED_CATEGORY = "encryptedCategory";
+	private static final String ENCRYPTED_VALUE_NAME = "encryptedValueName";
+	private static final String ENCRYPTED_VALUE = "encryptedValue";
+	private static final String CIPHER_AUTHORIZATION_ID_NAME = "cipherAuthorizationIdName";
 	private static final String CIPHER_AUTHORIZATION_ID = "cipherAuthorizationId";
-	private static final String DECRYPT_VALUE = "toBeDecrypted";
 	
-	private AuthorizationIdValidator authorizationIdValidator = null;
 	private CentralDecrypter centralDecrypter = null;
 
 	/**
@@ -33,7 +35,6 @@ public class DecryptServlet extends AbstractCentralServlet
 	 */
 	public DecryptServlet()
 	{
-		authorizationIdValidator = new AuthorizationIdValidator(); 
 		centralDecrypter = new CentralDecrypter();
 	}
 
@@ -43,24 +44,29 @@ public class DecryptServlet extends AbstractCentralServlet
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
+		String remoteHost = request.getRemoteHost();
+		String serviceName = request.getParameter(SERVICE_NAME);
+		
 		response.setContentType("text/html");
 		
+		String encryptedCategory = request.getParameter(ENCRYPTED_CATEGORY); //Is it some Discovery Property or Config Property
+		String encryptedValueName = request.getParameter(ENCRYPTED_VALUE_NAME);
+		String encryptedValue = request.getParameter(ENCRYPTED_VALUE);
+		String cipherAuthorizationIdName = request.getParameter(CIPHER_AUTHORIZATION_ID_NAME);
 		String cipherAuthorizationId = request.getParameter(CIPHER_AUTHORIZATION_ID);
-		String toBeDecrypted = request.getParameter(DECRYPT_VALUE);
 
-		String requestedValue = "[" + cipherAuthorizationId +"] [" + toBeDecrypted + "]";
+		//[Discovery][ControllerDecrypterAuthorizationId][TdmVTwllpL3hE+HyDz1ScA==][ControllerDecrypterAuthorizationId][477e0c1b-d057-40df-9c56-e7c52ddb875d]
+		String requestedValue = "[" + encryptedCategory + "]" + "[" + encryptedValueName +"]" +  "[" + encryptedValue + "]" + "[" + cipherAuthorizationIdName + "]" + "[" + cipherAuthorizationId + "]";
 
 		try
 		{
 			recordAudit(request, "Decrypt", requestedValue);
 			
-			String remoteHost = request.getRemoteHost();
-			
-			if (authorizationIdValidator.isValidCipherAuthorizationId(cipherAuthorizationId))
+			if (centralDAO.isDecryptRequestValid(remoteHost, serviceName, encryptedCategory, encryptedValueName, encryptedValue, cipherAuthorizationIdName, cipherAuthorizationId))
 			{
 				try
 				{
-					response.getWriter().write(centralDecrypter.decrypt(toBeDecrypted));
+					response.getWriter().write(centralDecrypter.decrypt(encryptedValue));
 				}
 				catch (Exception expt)
 				{
@@ -72,7 +78,7 @@ public class DecryptServlet extends AbstractCentralServlet
 			else
 			{
 				response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-				response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Server [" + remoteHost + "] is not registered server.");
+				response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Server [" + remoteHost + "] is not a registered server.");
 			}
 		}
 		catch (DAOException expt)
