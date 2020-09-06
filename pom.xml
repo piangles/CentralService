@@ -3,10 +3,9 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.TBD.central</groupId>
 	<artifactId>CentralService</artifactId>
-	<packaging>war</packaging>
-	<name>Central Service Webapp</name>
-	<url>http://maven.apache.org</url>
-	<version>${svc-central-version}</version>
+	<packaging>jar</packaging>
+	<name>CentralService</name>
+	<version>0.1</version>
 
 	<dependencies>
 		<dependency>
@@ -71,14 +70,25 @@
 		<javax.websocket-api-version>1.0</javax.websocket-api-version>
 		<jetty-version>9.2.7.v20150116</jetty-version>
 	</properties>
+	
+	<distributionManagement>
+		<snapshotRepository>
+			<id>piangle-s3-artifact</id>
+			<url>s3://piangle-s3-artifact/snapshot</url>
+		</snapshotRepository>
+		<repository>
+			<id>piangle-s3-artifact</id>
+			<url>s3://piangle-s3-artifact/release</url>
+		</repository>
+	</distributionManagement>
 
 	<build>
-		<finalName>svc-central</finalName>
+		<finalName>CentralService</finalName>
 		<extensions>
 			<extension>
 				<groupId>org.springframework.build</groupId>
 				<artifactId>aws-maven</artifactId>
-				<version>${org.springframework.build.aws-maven-version}</version>
+				<version>5.0.0.RELEASE</version>
 			</extension>
 		</extensions>
 		
@@ -93,7 +103,7 @@
 				</configuration>
 			</plugin>
 		
-			<plugin>
+		<!-- <plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
 				<configuration>
@@ -127,7 +137,7 @@
 						</configuration>
 					</execution>
 				</executions>
-			</plugin>
+			</plugin> -->
 
 		</plugins>
 	</build>
