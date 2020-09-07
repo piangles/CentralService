@@ -103,7 +103,7 @@
 				</configuration>
 			</plugin>
 		
-		<!-- <plugin>
+			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
 				<configuration>
@@ -127,17 +127,17 @@
 								<artifactItem>
 									<groupId>com.TBD.central</groupId>
 									<artifactId>CentralService</artifactId>
-									<version>${svc-central-version}</version>
+									<version>0.1</version>
 									<type>war</type>
 									<overWrite>true</overWrite>
 									<outputDirectory>../Export</outputDirectory>
-									<destFileName>svc-central.war</destFileName>
+									<destFileName>CentralService.war</destFileName>
 								</artifactItem>
 							</artifactItems>
 						</configuration>
 					</execution>
 				</executions>
-			</plugin> -->
+			</plugin> 
 
 		</plugins>
 	</build>
