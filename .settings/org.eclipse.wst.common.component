@@ -9,10 +9,6 @@
                 
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
                 
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/db"/>
-                
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/db"/>
-                
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/scripts"/>
                 
         <property name="context-root" value="svc-central"/>
