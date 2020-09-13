@@ -15,7 +15,6 @@ import com.TBD.central.services.dao.DAOException;
  */
 public class DecryptServlet extends AbstractCentralServlet
 {
-	
 	private static final long serialVersionUID = 1L;
 	private static final String ENCRYPTED_CATEGORY = "encryptedCategory";
 	private static final String ENCRYPTED_VALUE_NAME = "encryptedValueName";

@@ -32,5 +32,4 @@ public class CentralDecrypter
 
 		return new String(original);
 	}
-
 }
