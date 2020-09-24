@@ -1,4 +1,4 @@
-package com.TBD.central.services;
+package org.piangles.central.services;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -8,9 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.TBD.central.services.dao.CentralDAO;
-import com.TBD.central.services.dao.CentralDAOImpl;
-import com.TBD.central.services.dao.DAOException;
+import org.piangles.central.services.dao.CentralDAO;
+import org.piangles.central.services.dao.CentralDAOImpl;
+import org.piangles.central.services.dao.DAOException;
 
 /**
  * Servlet implementation class CentralDaoServlet

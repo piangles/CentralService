@@ -1,13 +1,12 @@
 //package com.TBD.core.services.dao;
-package com.TBD.central.services.dao;
+package org.piangles.central.services.dao;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Properties;
 
 import org.apache.commons.dbcp2.BasicDataSource;
-
-import com.TBD.central.services.CentralDecrypter;
+import org.piangles.central.services.CentralDecrypter;
 
 public class DataStore
 {

@@ -1,4 +1,4 @@
-package com.TBD.central.services.dao;
+package org.piangles.central.services.dao;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.sql.Types;
 import java.util.Properties;
 
-import com.TBD.central.services.CentralDecrypter;
+import org.piangles.central.services.CentralDecrypter;
 
 public final class CentralDAOImpl implements CentralDAO 
 {
