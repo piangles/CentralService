@@ -1,4 +1,4 @@
-package com.TBD.central.services;
+package org.piangles.central.services;
 
 import java.io.IOException;
 import java.util.Properties;
@@ -9,15 +9,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.TBD.central.services.dao.DAOException;
+import org.piangles.central.services.dao.DAOException;
 
 /**
  * Servlet implementation class DiscoveryServlet
  */
-public class Tier1ConfigurationServlet extends AbstractCentralServlet
+public class DiscoveryServlet extends AbstractCentralServlet
 {
 	private static final long serialVersionUID = 1L;
-	private static final String SERVICE_NAME = "ServiceName";
 	
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -31,9 +30,8 @@ public class Tier1ConfigurationServlet extends AbstractCentralServlet
 		response.setContentType("text/html");
 		try
 		{
-			recordAudit(request, "Tier1Config", serviceName);
-			
-			Properties nvPair = centralDAO.getTier1Configuration(remoteHost, serviceName);
+			recordAudit(request, "Discover", serviceName);
+			Properties nvPair = centralDAO.getDiscoveryProperties(remoteHost, serviceName);
 
 			if (nvPair != null && !nvPair.isEmpty())
 			{
@@ -47,14 +45,14 @@ public class Tier1ConfigurationServlet extends AbstractCentralServlet
 			else
 			{
 				response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-				response.getWriter().write("Server [" + remoteHost + "] is not a registered server.");
+				response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Server [" + remoteHost + "] is not a registered server.");
 			}
 		}
 		catch (DAOException expt)
 		{
 			Call911.notify(expt, expt.getMessage());
 			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-			response.getWriter().write("Server Internal Error");
+			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Server Internal Error");
 		}
 	}
 }

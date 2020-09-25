@@ -1,4 +1,4 @@
-package com.TBD.central.services.dao;
+package org.piangles.central.services.dao;
 
 public interface Decrypter
 {
