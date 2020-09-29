@@ -1,4 +1,3 @@
-//package com.TBD.core.services.dao;
 package org.piangles.central.services.dao;
 
 import java.sql.Connection;

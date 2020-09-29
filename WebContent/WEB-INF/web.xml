@@ -6,17 +6,17 @@
 
 	<servlet>
 		<servlet-name>DiscoveryServlet</servlet-name>
-		<servlet-class>com.TBD.central.services.DiscoveryServlet</servlet-class>
+		<servlet-class>org.piangles.central.services.DiscoveryServlet</servlet-class>
 	</servlet>
 
 	<servlet>
 		<servlet-name>Tier1ConfigurationServlet</servlet-name>
-		<servlet-class>com.TBD.central.services.Tier1ConfigurationServlet</servlet-class>
+		<servlet-class>org.piangles.central.services.Tier1ConfigurationServlet</servlet-class>
 	</servlet>
 
 	<servlet>
 		<servlet-name>DecryptServlet</servlet-name>
-		<servlet-class>com.TBD.central.services.DecryptServlet</servlet-class>
+		<servlet-class>org.piangles.central.services.DecryptServlet</servlet-class>
 	</servlet>
 
 	<servlet-mapping>
