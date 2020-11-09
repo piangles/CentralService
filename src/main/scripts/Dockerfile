@@ -1,7 +1,7 @@
-FROM tomcat:8.0-alpine
+FROM tomcat:jdk8-corretto
 WORKDIR /
 
-ADD CentralService.war /opt/bitnami/apache-tomcat/webapps/
+ADD CentralService.war /usr/local/tomcat/webapps/
 
 EXPOSE 8080
 
