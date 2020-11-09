@@ -5,4 +5,4 @@ ADD CentralService.war /opt/bitnami/apache-tomcat/webapps/
 
 EXPOSE 8080
 
-CMD [“catalina.sh”, “run”]
+CMD ["catalina.sh", "run"]
