@@ -14,10 +14,14 @@ public class DataStore
 	public static final String PASSWORD = "Password";
 	public static final String URL = "URL";
 	
-	private static final String SP_BEGIN = "{call ";
+	private static final String SP_BEGIN = "call ";
 	private static final String SP_PARAM = "?";
-	private static final String SP_END = ")}";
+	private static final String SP_END = ")";
 
+	private static final String FUNC_BEGIN = "{call ";
+	private static final String FUNC_PARAM = "?";
+	private static final String FUNC_END = ")}";
+	
 	private BasicDataSource ds = null;
 
 	public DataStore(Properties dataStoreProps, CentralDecrypter decrypter) throws Exception
@@ -40,7 +44,7 @@ public class DataStore
 		return this.ds.getConnection();
 	}
 
-	public static String createCALLString(String storedProcName, int paramCount)
+	public static String createCallString(String storedProcName, int paramCount)
 	{
 		StringBuffer sb = new StringBuffer(SP_BEGIN);
 		sb.append(storedProcName).append("(");
@@ -55,6 +59,24 @@ public class DataStore
 		}
 
 		sb.append(SP_END);
+		return sb.toString();
+	}
+	
+	public static String createFunctionString(String storedProcName, int paramCount)
+	{
+		StringBuffer sb = new StringBuffer(FUNC_BEGIN);
+		sb.append(storedProcName).append("(");
+
+		for (int i = 0; i < paramCount; ++i)
+		{
+			if (i != 0)
+			{
+				sb.append(",");
+			}
+			sb.append(FUNC_PARAM);
+		}
+
+		sb.append(FUNC_END);
 		return sb.toString();
 	}
 }

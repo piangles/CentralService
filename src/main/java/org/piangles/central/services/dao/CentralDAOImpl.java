@@ -33,7 +33,7 @@ public final class CentralDAOImpl implements CentralDAO
 		try
 		{
 			dbConnection = dataStore.getConnection();
-			call = dbConnection.prepareCall(DataStore.createCALLString(INSERT_AUDIT_DISCOVERY_SP, 6));
+			call = dbConnection.prepareCall(DataStore.createCallString(INSERT_AUDIT_DISCOVERY_SP, 6));
 			call.setString(1, remoteAddress);
 			call.setString(2, remoteHost);
 			call.setInt(3, remotePort);
@@ -84,7 +84,7 @@ public final class CentralDAOImpl implements CentralDAO
 		try
 		{
 			dbConnection = dataStore.getConnection();
-			call = dbConnection.prepareCall(DataStore.createCALLString(storedProcedureName, 2));
+			call = dbConnection.prepareCall(DataStore.createFunctionString(storedProcedureName, 2));
 			call.setString(1, callingServerName);
 			call.setString(2, serviceName);
 
@@ -126,7 +126,7 @@ public final class CentralDAOImpl implements CentralDAO
 		try
 		{
 			dbConnection = dataStore.getConnection();
-			call = dbConnection.prepareCall(DataStore.createCALLString(VALIDATE_DECRYPT_REQUEST_SP, 8));
+			call = dbConnection.prepareCall(DataStore.createFunctionString(VALIDATE_DECRYPT_REQUEST_SP, 8));
 			call.setString(1, hostName);
 			call.setString(2, serviceName);
 			call.setString(3, encryptedCategory);
@@ -137,10 +137,14 @@ public final class CentralDAOImpl implements CentralDAO
 			call.registerOutParameter(8, Types.INTEGER);
 
 			call.execute();
-			Integer rowCount = (Integer)call.getObject(8, Integer.class);
-			if (rowCount != null && rowCount.intValue() == 2)
+			Object oRowCount = call.getObject(8);
+			if (oRowCount != null)
 			{
-				valid = true;
+				Integer rowCount = (Integer)oRowCount;
+				if (rowCount.intValue() == 2)
+				{
+					valid = true;
+				}
 			}
 		}
 		catch (SQLException e)
