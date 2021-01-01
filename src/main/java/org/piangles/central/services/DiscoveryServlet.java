@@ -46,21 +46,18 @@ public class DiscoveryServlet extends AbstractCentralServlet
 				}
 				else
 				{
-					response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-					response.sendError(HttpServletResponse.SC_NOT_FOUND, "Service [" + serviceName + "] Discovery details not found.");
+					sendErrorResponse(response, HttpServletResponse.SC_NOT_FOUND, "Service [" + serviceName + "] Discovery details not found.");
 				}
 			}
 			else
 			{
-				response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-				response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Server [" + remoteHost + "] is not a registered server.");
+				sendErrorResponse(response, HttpServletResponse.SC_FORBIDDEN, "Server [" + remoteHost + "] is not a registered server.");
 			}
 		}
 		catch (DAOException expt)
 		{
 			Call911.notify(expt, expt.getMessage());
-			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Server Internal Error");
+			sendErrorResponse(response, HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Server Internal Error");
 		}
 	}
 }

@@ -66,4 +66,10 @@ public abstract class AbstractCentralServlet extends HttpServlet
 
 		centralDAO.recordAudit(remoteAddress, remoteHost, remotePort, remoteUser, requestedService, requestedValue);
 	}
+	
+	protected final void sendErrorResponse(HttpServletResponse response, int httpStatusCode, String message) throws IOException
+	{
+		response.setStatus(httpStatusCode);
+		response.getWriter().write(message);
+	}
 }

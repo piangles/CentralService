@@ -78,21 +78,18 @@ public class DecryptServlet extends AbstractCentralServlet
 				}
 				else
 				{
-					response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-					response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Decryption request details could not be validated.");
+					sendErrorResponse(response, HttpServletResponse.SC_BAD_REQUEST, "Decryption request details could not be validated.");
 				}
 			}
 			else
 			{
-				response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-				response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Server [" + remoteHost + "] is not a registered server.");
+				sendErrorResponse(response, HttpServletResponse.SC_FORBIDDEN, "Server [" + remoteHost + "] is not a registered server.");
 			}
 		}
 		catch (DAOException expt)
 		{
 			Call911.notify(expt, expt.getMessage());
-			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Server Internal Error");
+			sendErrorResponse(response, HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Server Internal Error");
 		}
 	}
 }

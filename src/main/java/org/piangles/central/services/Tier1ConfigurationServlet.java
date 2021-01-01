@@ -47,21 +47,18 @@ public class Tier1ConfigurationServlet extends AbstractCentralServlet
 				}
 				else
 				{
-					response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-					response.sendError(HttpServletResponse.SC_NOT_FOUND, "Service [" + serviceName + "] Tier1Config details not found.");
+					sendErrorResponse(response, HttpServletResponse.SC_NOT_FOUND, "Service [" + serviceName + "] Tier1Config details not found.");
 				}
 			}
 			else
 			{
-				response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-				response.getWriter().write("Server [" + remoteHost + "] is not a registered server.");
+				sendErrorResponse(response, HttpServletResponse.SC_FORBIDDEN, "Server [" + remoteHost + "] is not a registered server.");				
 			}
 		}
 		catch (DAOException expt)
 		{
 			Call911.notify(expt, expt.getMessage());
-			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-			response.getWriter().write("Server Internal Error");
+			sendErrorResponse(response, HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Server Internal Error");
 		}
 	}
 }
