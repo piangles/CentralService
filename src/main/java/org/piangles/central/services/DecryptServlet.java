@@ -59,19 +59,27 @@ public class DecryptServlet extends AbstractCentralServlet
 
 		try
 		{
+			System.out.println("Request for Decrypt : " + serviceName + " from host : " + remoteHost);
 			recordAudit(request, "Decrypt", requestedValue);
-			
-			if (centralDAO.isDecryptRequestValid(remoteHost, serviceName, encryptedCategory, encryptedValueName, encryptedValue, cipherAuthorizationIdName, cipherAuthorizationId))
+			if (isHostAuthorized(remoteHost))
 			{
-				try
+				if (centralDAO.isDecryptRequestValid(remoteHost, serviceName, encryptedCategory, encryptedValueName, encryptedValue, cipherAuthorizationIdName, cipherAuthorizationId))
 				{
-					response.getWriter().write(centralDecrypter.decrypt(encryptedValue));
+					try
+					{
+						response.getWriter().write(centralDecrypter.decrypt(encryptedValue));
+					}
+					catch (Exception expt)
+					{
+						Call911.notify(expt, expt.getMessage());
+						response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+						response.getWriter().write("Server Internal Error");
+					}
 				}
-				catch (Exception expt)
+				else
 				{
-					Call911.notify(expt, expt.getMessage());
-					response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-					response.getWriter().write("Server Internal Error");
+					response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+					response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Decryption request details could not be validated.");
 				}
 			}
 			else

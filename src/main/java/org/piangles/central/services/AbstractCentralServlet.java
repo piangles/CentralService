@@ -50,6 +50,12 @@ public abstract class AbstractCentralServlet extends HttpServlet
 		response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 		response.getWriter().write("Bad Request");
 	}
+	
+	protected final boolean isHostAuthorized(String remoteAddress) throws DAOException
+	{
+		return centralDAO.isHostAuthorized(remoteAddress);
+	}
+	
 
 	protected final void recordAudit(HttpServletRequest request, String requestedService, String requestedValue) throws DAOException
 	{

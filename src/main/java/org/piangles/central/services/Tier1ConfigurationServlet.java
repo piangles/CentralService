@@ -31,17 +31,24 @@ public class Tier1ConfigurationServlet extends AbstractCentralServlet
 		response.setContentType("text/html");
 		try
 		{
+			System.out.println("Request for Tier1Config : " + serviceName + " from host : " + remoteHost);
 			recordAudit(request, "Tier1Config", serviceName);
-			
-			Properties nvPair = centralDAO.getTier1Configuration(remoteHost, serviceName);
-
-			if (nvPair != null && !nvPair.isEmpty())
+			if (isHostAuthorized(remoteHost))
 			{
-				response.setStatus(HttpServletResponse.SC_OK);
-				Set<Object> keys = nvPair.keySet();
-				for (Object key : keys)
+				Properties nvPair = centralDAO.getTier1Configuration(remoteHost, serviceName);
+				if (nvPair != null && !nvPair.isEmpty())
 				{
-					response.getWriter().write(key + "=" + nvPair.get(key) + "\n");
+					response.setStatus(HttpServletResponse.SC_OK);
+					Set<Object> keys = nvPair.keySet();
+					for (Object key : keys)
+					{
+						response.getWriter().write(key + "=" + nvPair.get(key) + "\n");
+					}
+				}
+				else
+				{
+					response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+					response.sendError(HttpServletResponse.SC_NOT_FOUND, "Service [" + serviceName + "] Tier1Config details not found.");
 				}
 			}
 			else

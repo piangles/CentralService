@@ -30,16 +30,24 @@ public class DiscoveryServlet extends AbstractCentralServlet
 		response.setContentType("text/html");
 		try
 		{
+			System.out.println("Request for Discover : " + serviceName + " from host : " + remoteHost);
 			recordAudit(request, "Discover", serviceName);
-			Properties nvPair = centralDAO.getDiscoveryProperties(remoteHost, serviceName);
-
-			if (nvPair != null && !nvPair.isEmpty())
+			if (isHostAuthorized(remoteHost))
 			{
-				response.setStatus(HttpServletResponse.SC_OK);
-				Set<Object> keys = nvPair.keySet();
-				for (Object key : keys)
+				Properties nvPair = centralDAO.getDiscoveryProperties(remoteHost, serviceName);
+				if (nvPair != null && !nvPair.isEmpty())
 				{
-					response.getWriter().write(key + "=" + nvPair.get(key) + "\n");
+					response.setStatus(HttpServletResponse.SC_OK);
+					Set<Object> keys = nvPair.keySet();
+					for (Object key : keys)
+					{
+						response.getWriter().write(key + "=" + nvPair.get(key) + "\n");
+					}
+				}
+				else
+				{
+					response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+					response.sendError(HttpServletResponse.SC_NOT_FOUND, "Service [" + serviceName + "] Discovery details not found.");
 				}
 			}
 			else
